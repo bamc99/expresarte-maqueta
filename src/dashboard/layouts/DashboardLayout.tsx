@@ -23,7 +23,6 @@ export const DashboardLayout = ({
   sucursales,
   defaultLayout = [265, 1095],
   defaultCollapsed = false,
-  navCollapsedSize,
   children
 }: DashboardProps) => {
   const [isCollapsed, setIsCollapsed] = useState(defaultCollapsed);
