@@ -40,7 +40,7 @@ export const EditClientAccountPage = () => {
         password_confirmation: form.password_confirmation.value,
       }
       const filteredFormData = Object.fromEntries(
-        Object.entries(formData).filter(([key, value]) => value !== undefined && value !== '' && value !== null)
+        Object.entries(formData).filter(([value]) => value !== undefined && value !== '' && value !== null)
       );
       let response;
       try {

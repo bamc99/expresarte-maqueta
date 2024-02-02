@@ -1,6 +1,6 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { useFetchUsers } from "../../hooks/useFetchUsers"
-import { Button, buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { NavLink } from "react-router-dom";
 import { cn } from "@/lib/utils";
 

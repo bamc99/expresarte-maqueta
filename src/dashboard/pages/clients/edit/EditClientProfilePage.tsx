@@ -69,7 +69,7 @@ export const EditClientProfilePage = () => {
         client_id: clientId,
       }
       const filteredFormData = Object.fromEntries(
-        Object.entries(formData).filter(([key, value]) => value !== undefined && value !== '' && value !== null)
+        Object.entries(formData).filter(([value]) => value !== undefined && value !== '' && value !== null)
       );
       let response;
       try {

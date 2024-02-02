@@ -77,7 +77,7 @@ export const EditUserProfilePage = () => {
         branch_id: user?.profile?.branch_id ?? "1"
       }
       const filteredFormData = Object.fromEntries(
-        Object.entries(formData).filter(([key, value]) => value !== undefined && value !== '' && value !== null)
+        Object.entries(formData).filter(([value]) => value !== undefined && value !== '' && value !== null)
       );
       let response;
       try {
