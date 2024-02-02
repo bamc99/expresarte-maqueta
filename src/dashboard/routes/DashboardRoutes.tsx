@@ -6,6 +6,9 @@ import { BranchesPage } from '../pages/branches/BranchesPage';
 import { NewBranchPage } from '../pages/branches/NewBranchPage';
 import { NewUserPage } from '../pages/users/NewUserPage';
 import { UserRoutes } from './UserRoutes';
+import { ClientsPage } from '../pages/clients/ClientsPage';
+import { NewClientPage } from '../pages/clients/NewClientPage';
+import { ClientRoutes } from './ClientRoutes';
 
 export const DashboardRoutes = () => {
 
@@ -47,6 +50,9 @@ export const DashboardRoutes = () => {
           <Route path="users/edit/*" element={<UserRoutes />} />
           <Route path="branches" element={<BranchesPage />} />
           <Route path="branches/new" element={<NewBranchPage />} />
+          <Route path="clients" element={<ClientsPage />} />
+          <Route path="clients/new" element={<NewClientPage />} />
+          <Route path="clients/edit/*" element={<ClientRoutes />} />
         </Routes>
       </DashboardLayout>
     </>

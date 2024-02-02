@@ -1,12 +1,12 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { useFetchUsers } from "../../hooks/useFetchUsers"
-import { Button, buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { NavLink } from "react-router-dom";
 import { cn } from "@/lib/utils";
+import { useFetchClients } from "@/dashboard/hooks/useFetchClients";
 
-export const UsersTable = () => {
+export const ClientsTable = () => {
 
-    const { users, isLoading } = useFetchUsers();
+    const { clients, isLoading } = useFetchClients();
 
     return (
         <>
@@ -22,26 +22,22 @@ export const UsersTable = () => {
                             <TableHead>Nombre</TableHead>
                             <TableHead>Correo</TableHead>
                             <TableHead>Teléfono</TableHead>
-                            <TableHead>Rol</TableHead>
-                            <TableHead>Sucursal</TableHead>
                             <TableHead>Fecha de creación</TableHead>
                             <TableHead>Acciones</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
                         {
-                            users.map((user) => (
-                                <TableRow key={user.id}>
-                                    <TableCell>{user.id}</TableCell>
-                                    <TableCell>{user.name}</TableCell>
-                                    <TableCell>{user.email}</TableCell>
-                                    <TableCell>{user.profile?.phone ?? 'No disponible'}</TableCell>
-                                    <TableCell>{user.role_names[0]}</TableCell>
-                                    <TableCell>{user.profile?.branch.name ?? 'No disponible'}</TableCell>
-                                    <TableCell>{new Date(user.created_at).toLocaleString()}</TableCell>
+                            clients.map((client) => (
+                                <TableRow key={client.id}>
+                                    <TableCell>{client.id}</TableCell>
+                                    <TableCell>{client.name}</TableCell>
+                                    <TableCell>{client.email}</TableCell>
+                                    <TableCell>{client.profile?.phone ?? 'No disponible'}</TableCell>
+                                    <TableCell>{new Date(client.created_at).toLocaleString()}</TableCell>
                                     <TableCell>
                                         <NavLink
-                                            to={`/users/edit/account/${user.id}`}
+                                            to={`/clients/edit/account/${client.id}`}
                                             className={cn(
                                                 buttonVariants({ variant: 'default' }),
                                                 "dark:bg-muted dark:text-muted-foreground dark:hover:bg-muted dark:hover:text-white ms-auto"

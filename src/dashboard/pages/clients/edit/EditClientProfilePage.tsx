@@ -6,17 +6,17 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Separator } from "@/components/ui/separator"
-import { useFetchUser } from "@/dashboard/hooks/useFetchUser"
-import { EditUserLayout } from "@/dashboard/layouts/EditUserLayout"
+import { useFetchClient } from "@/dashboard/hooks/useFetchClient"
+import { EditClientLayout } from "@/dashboard/layouts/EditClientLayout"
 import { useContext, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 
-export const EditUserProfilePage = () => {
+export const EditClientProfilePage = () => {
   const { user: authUser } = useContext(AuthContext);
 
-  let { userId } = useParams();
-  const id = userId ? parseInt(userId, 10) : 0;
-  const { user, isLoading: loadingUser } = useFetchUser({ id: id });
+  let { clientId } = useParams();
+  const id = clientId ? parseInt(clientId, 10) : 0;
+  const { client, isLoading: loadingUser } = useFetchClient({ id: id });
 
   const [storeError, setStoreError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -24,24 +24,20 @@ export const EditUserProfilePage = () => {
   const navigate = useNavigate();
 
   const initialProfileValues = {
-    first_name: user?.profile?.first_name,
-    middle_name: user?.profile?.middle_name,
-    last_name: user?.profile?.last_name,
-    second_last_name: user?.profile?.second_last_name,
-    street: user?.profile?.street,
-    house_number: user?.profile?.house_number,
-    neighborhood: user?.profile?.neighborhood,
-    city: user?.profile?.city,
-    state: user?.profile?.state,
-    postal_code: user?.profile?.postal_code,
-    country: user?.profile?.country,
-    phone: user?.profile?.phone,
-    emergency_name: user?.profile?.emergency_name,
-    emergency_phone: user?.profile?.emergency_phone,
-    emergency_relationship: user?.profile?.emergency_relationship,
-    date_of_birth: user?.profile?.date_of_birth,
-    date_of_hire: user?.profile?.date_of_hire,
-    nss: user?.profile?.nss
+    first_name: client?.profile?.first_name,
+    middle_name: client?.profile?.middle_name,
+    last_name: client?.profile?.last_name,
+    second_last_name: client?.profile?.second_last_name,
+    street: client?.profile?.street,
+    house_number: client?.profile?.house_number,
+    neighborhood: client?.profile?.neighborhood,
+    city: client?.profile?.city,
+    state: client?.profile?.state,
+    postal_code: client?.profile?.postal_code,
+    country: client?.profile?.country,
+    phone: client?.profile?.phone,
+    date_of_birth: client?.profile?.date_of_birth,
+    date_of_first_visit: client?.profile?.date_of_first_visit,
   };
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -67,21 +63,17 @@ export const EditUserProfilePage = () => {
         postal_code: form.postal_code.value,
         country: form.country.value,
         phone: form.phone.value,
-        emergency_name: form.emergency_name.value,
-        emergency_phone: form.emergency_phone.value,
-        emergency_relationship: form.emergency_relationship.value,
         date_of_birth: form.date_of_birth.value,
-        date_of_hire: form.date_of_hire.value,
+        date_of_first_visit: form.date_of_first_visit.value,
         nss: form.nss.value,
-        user_id: userId,
-        branch_id: user?.profile?.branch_id ?? "1"
+        client_id: clientId,
       }
       const filteredFormData = Object.fromEntries(
         Object.entries(formData).filter(([key, value]) => value !== undefined && value !== '' && value !== null)
       );
       let response;
       try {
-        const { data } = await masterApi.put(`/user/update-profile/${userId}`, filteredFormData, {
+        const { data } = await masterApi.put(`/client/update-profile/${clientId}`, filteredFormData, {
           headers: {
             Authorization: `Bearer ${authUser?.token}`
           }
@@ -120,16 +112,12 @@ export const EditUserProfilePage = () => {
     { id: 'postal_code', label: 'Código Postal', type: 'text', placeholder: 'Código Postal', value: initialProfileValues.postal_code },
     { id: 'country', label: 'País', type: 'text', placeholder: 'País', value: initialProfileValues.country },
     { id: 'phone', label: 'Teléfono', type: 'text', placeholder: 'Teléfono', value: initialProfileValues.phone },
-    { id: 'emergency_name', label: 'Nombre de contacto de Emergencia', type: 'text', placeholder: 'Nombre de Emergencia', value: initialProfileValues.emergency_name },
-    { id: 'emergency_phone', label: 'Teléfono de Emergencia', type: 'text', placeholder: 'Teléfono de Emergencia', value: initialProfileValues.emergency_phone },
-    { id: 'emergency_relationship', label: 'Parentezco de Emergencia', type: 'text', placeholder: 'Relación de Emergencia', value: initialProfileValues.emergency_relationship },
     { id: 'date_of_birth', label: 'Fecha de Nacimiento', type: 'date', placeholder: 'Fecha de Nacimiento', value: initialProfileValues.date_of_birth },
-    { id: 'date_of_hire', label: 'Fecha de Contratación', type: 'date', placeholder: 'Fecha de Contratación', value: initialProfileValues.date_of_hire },
-    { id: 'nss', label: 'Número de Seguro Social', type: 'text', placeholder: 'Número de Seguro Social', value: initialProfileValues.nss },
+    { id: 'date_of_first_visit', label: 'Fecha de Primera visita', type: 'date', placeholder: 'Fecha de Primera visita', value: initialProfileValues.date_of_first_visit },
   ];
 
   return (
-    <EditUserLayout>
+    <EditClientLayout>
       <div className="space-y-6">
         <div>
           <h3 className="text-lg font-medium flex justify-between items-center">
@@ -180,6 +168,6 @@ export const EditUserProfilePage = () => {
         </div>
 
       </div>
-    </EditUserLayout>
+    </EditClientLayout>
   )
 }

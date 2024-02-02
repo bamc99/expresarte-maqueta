@@ -5,38 +5,21 @@ import { StaticAlert } from "@/components/ui/StaticAlert"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Separator } from "@/components/ui/separator"
-import { useFetchBranches } from "@/dashboard/hooks/useFetchBranches"
-import { useFetchUser } from "@/dashboard/hooks/useFetchUser"
-import { EditUserLayout } from "@/dashboard/layouts/EditUserLayout"
+import { useFetchClient } from "@/dashboard/hooks/useFetchClient"
+import { EditClientLayout } from "@/dashboard/layouts/EditClientLayout"
 import { useContext, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 
-export const EditUserAccountPage = () => {
+export const EditClientAccountPage = () => {
   const { user: authUser } = useContext(AuthContext);
 
-  let { userId } = useParams();
-  const id = userId ? parseInt(userId, 10) : 0;
-  const { user, isLoading: loadingUser } = useFetchUser({ id: id });
-
-  const { branches } = useFetchBranches();
-  const roles = [
-    { value: "Admin", label: "Administrador" },
-    { value: "Director", label: "Director" },
-    { value: "Gerente", label: "Gerente" },
-    { value: "Recepcionista", label: "Recepcionista" },
-    { value: "CYT", label: "CYT" },
-    { value: "Marketing", label: "Marketing" },
-    { value: "Estilista", label: "Estilista" },
-    { value: "Auxiliar", label: "Auxiliar" },
-  ]
+  let { clientId } = useParams();
+  const id = clientId ? parseInt(clientId, 10) : 0;
+  const { client, isLoading: loadingUser } = useFetchClient({ id: id });
 
   const [storeError, setStoreError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-
-  const [selectedBranch, setSelectedBranch] = useState<string | null>(null);
-  const [selectedRole, setSelectedRole] = useState<string | null>(null);
 
   const navigate = useNavigate();
 
@@ -51,19 +34,17 @@ export const EditUserAccountPage = () => {
       console.log('valid form');
 
       const formData = {
-        name: form.nameUser.value,
+        name: form.nameClient.value,
         email: form.email.value,
         password: form.password.value,
         password_confirmation: form.password_confirmation.value,
-        branch_id: selectedBranch,
-        roles: selectedRole
       }
       const filteredFormData = Object.fromEntries(
         Object.entries(formData).filter(([key, value]) => value !== undefined && value !== '' && value !== null)
       );
       let response;
       try {
-        const { data } = await masterApi.put(`/user/update-account/${userId}`, filteredFormData, {
+        const { data } = await masterApi.put(`/client/update-account/${clientId}`, filteredFormData, {
           headers: {
             Authorization: `Bearer ${authUser?.token}`
           }
@@ -75,9 +56,9 @@ export const EditUserAccountPage = () => {
         setIsLoading(false);
         return;
       }
-      if (response?.message == 'Usuario actualizado exitosamente') {
+      if (response?.message == 'Cliente actualizado exitosamente') {
         setStoreError(false);
-        navigate('/users');
+        navigate('/clientes');
       } else {
         setIsLoading(false);
         setStoreError(true);
@@ -91,7 +72,7 @@ export const EditUserAccountPage = () => {
   }
 
   return (
-    <EditUserLayout>
+    <EditClientLayout>
       <div className="space-y-6">
         <div>
           <h3 className="text-lg font-medium flex justify-between items-center">
@@ -111,10 +92,10 @@ export const EditUserAccountPage = () => {
 
               <div
                 className="space-y-1">
-                <Label htmlFor="nameUser">Nombre</Label>
+                <Label htmlFor="nameClient">Nombre</Label>
                 <Input
-                  id="nameUser"
-                  defaultValue={user?.name}
+                  id="nameClient"
+                  defaultValue={client?.name}
                   type="string"
                 />
               </div>
@@ -124,7 +105,7 @@ export const EditUserAccountPage = () => {
                 <Input
                   id="email"
                   type="email"
-                  defaultValue={user?.email}
+                  defaultValue={client?.email}
                 />
               </div>
               <div className="space-y-1">
@@ -143,52 +124,16 @@ export const EditUserAccountPage = () => {
                   type="password"
                 />
               </div>
-              <div className="space-y-1">
-                <Label htmlFor="branch_id">Sucursal</Label>
-                <Select name="branch_id" onValueChange={setSelectedBranch}>
-                  <SelectTrigger className="w-full" id="branch_id">
-                    <SelectValue placeholder="Seleccione una sucursal" />
-                  </SelectTrigger>
-                  <SelectContent >
-                    <SelectGroup>
-                      <SelectLabel>Sucursales disponibles</SelectLabel>
-                      {
-                        branches.map((branch) => (
-                          <SelectItem key={branch.id} value={`${branch.id}`}>{branch.name}</SelectItem>
-                        ))
-                      }
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
-              </div>
-              <div className="space-y-1">
-                <Label htmlFor="roles">Rol</Label>
-                <Select name="roles" onValueChange={setSelectedRole}>
-                  <SelectTrigger className="w-full" id="roles">
-                    <SelectValue placeholder="Seleccione un rol" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectGroup>
-                      <SelectLabel>Roles disponibles</SelectLabel>
-                      {
-                        roles.map((rol) => (
-                          <SelectItem key={rol.value} value={`${rol.value}`}>{rol.label}</SelectItem>
-                        ))
-                      }
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
-              </div>
               <div className="col-span-2 space-y-2">
                 <Button className="w-full" disabled={isLoading}>
                   {isLoading && (
                     <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
                   )}
-                  Actualizar usuario
+                  Actualizar cliente
                 </Button>
                 {
                   storeError ? (
-                    <StaticAlert title="Mmh." message="Tuvimos un problema al intentar registrar el usuario" type="error" />
+                    <StaticAlert title="Mmh." message="Tuvimos un problema al actualizar el cliente" type="error" />
                   ) : (
                     ''
                   )
@@ -199,6 +144,6 @@ export const EditUserAccountPage = () => {
         </div>
 
       </div>
-    </EditUserLayout>
+    </EditClientLayout>
   )
 }
