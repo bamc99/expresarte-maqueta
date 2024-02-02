@@ -43,12 +43,14 @@ export const LoginPage = () => {
       if (response?.token) {
         setLoginError(false);
         const userResponse = {
+          id: response.user.id,
           name: response.user.name,
           fullname: response.user.full_name,
           email: response.user.email,
           profileImage: response.user.profile_image_url,
           token: response.token.accessToken,
-          expires: response.token.expiresAt
+          expires: response.token.expiresAt,
+          role_names: response.user.role_names
         };
         login(userResponse);
         navigate('/');

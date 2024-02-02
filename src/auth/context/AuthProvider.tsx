@@ -21,20 +21,24 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [authState, dispatch] = useReducer(authReducer, {}, init);
 
   const login = async ({
+    id,
     name,
     fullname,
     email,
     profileImage,
     token,
     expires,
+    role_names
   }: User) => {
     const user = {
+      id,
       name,
       fullname,
       email,
       profileImage,
       token,
       expires,
+      role_names
     };
     const action = { type: types.login, payload: user };
     localStorage.setItem("user", JSON.stringify(user));

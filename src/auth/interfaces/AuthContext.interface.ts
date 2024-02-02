@@ -15,4 +15,6 @@ export interface User {
     profileImage: string;
     token: string;
     expires: string;
+    id: number;
+    role_names: string[];
 }

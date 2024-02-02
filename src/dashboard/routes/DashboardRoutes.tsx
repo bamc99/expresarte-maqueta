@@ -1,6 +1,11 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { HomePage } from '../pages/HomePage';
 import { DashboardLayout } from '../layouts/DashboardLayout';
+import { UsersPage } from '../pages/users/UsersPage';
+import { BranchesPage } from '../pages/branches/BranchesPage';
+import { NewBranchPage } from '../pages/branches/NewBranchPage';
+import { NewUserPage } from '../pages/users/NewUserPage';
+import { UserRoutes } from './UserRoutes';
 
 export const DashboardRoutes = () => {
 
@@ -37,6 +42,11 @@ export const DashboardRoutes = () => {
         <Routes>
           <Route path="/*" element={<Navigate to="/home" replace />} />
           <Route path="home" element={<HomePage />} />
+          <Route path="users" element={<UsersPage />} />
+          <Route path="users/new" element={<NewUserPage />} />
+          <Route path="users/edit/*" element={<UserRoutes />} />
+          <Route path="branches" element={<BranchesPage />} />
+          <Route path="branches/new" element={<NewBranchPage />} />
         </Routes>
       </DashboardLayout>
     </>

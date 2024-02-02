@@ -3,6 +3,7 @@ import { LucideIcon } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 import { buttonVariants } from "@/components/ui/button"
+import { NavLink } from "react-router-dom"
 
 interface NavProps {
   isCollapsed: boolean
@@ -11,6 +12,7 @@ interface NavProps {
     label?: string
     icon: LucideIcon
     variant: "default" | "ghost"
+    uri?: string
   }[]
 }
 
@@ -25,8 +27,8 @@ export function Nav({ links, isCollapsed }: NavProps) {
           isCollapsed ? (
             <Tooltip key={index} delayDuration={0}>
               <TooltipTrigger asChild>
-                <a
-                  href="#"
+                <NavLink
+                  to={link.uri ?? '#'}
                   className={cn(
                     buttonVariants({ variant: link.variant, size: "icon" }),
                     "h-9 w-9",
@@ -36,7 +38,7 @@ export function Nav({ links, isCollapsed }: NavProps) {
                 >
                   <link.icon className="h-4 w-4" />
                   <span className="sr-only">{link.title}</span>
-                </a>
+                </NavLink>
               </TooltipTrigger>
               <TooltipContent side="right" className="flex items-center gap-4">
                 {link.title}
@@ -48,9 +50,9 @@ export function Nav({ links, isCollapsed }: NavProps) {
               </TooltipContent>
             </Tooltip>
           ) : (
-            <a
+            <NavLink
               key={index}
-              href="#"
+              to={link.uri ?? '#'}
               className={cn(
                 buttonVariants({ variant: link.variant, size: "sm" }),
                 link.variant === "default" &&
@@ -71,7 +73,7 @@ export function Nav({ links, isCollapsed }: NavProps) {
                   {link.label}
                 </span>
               )}
-            </a>
+            </NavLink>
           )
         )}
       </nav>

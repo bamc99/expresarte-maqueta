@@ -3,6 +3,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { useContext } from "react";
+import { NavLink } from "react-router-dom";
 
 export function UserNav() {
 
@@ -29,10 +30,20 @@ export function UserNav() {
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem>
-            Perfil
+            <NavLink
+              to={`/users/edit/profile/${user?.id}`}
+              className={'w-full'}
+            >
+              Perfil
+            </NavLink>
           </DropdownMenuItem>
           <DropdownMenuItem>
-            Configuración
+            <NavLink
+              to={`/users/edit/account/${user?.id}`}
+              className={'w-full'}
+            >
+              Configuración
+            </NavLink>
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
