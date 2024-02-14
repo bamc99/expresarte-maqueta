@@ -93,7 +93,7 @@ export const EditUserProfilePage = () => {
         setIsLoading(false);
         return;
       }
-      if (response?.message == 'Usuario actualizado exitosamente') {
+      if (response?.message == 'Perfil actualizado exitosamente') {
         setStoreError(false);
         navigate('/users');
       } else {

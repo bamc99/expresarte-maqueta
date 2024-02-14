@@ -1,0 +1,88 @@
+{
+    "day": "13-02-2024",
+    "open": true,
+    "openningTime": "8:00:00",
+    "closingTime": "22:00:00",
+    "data": [
+        {
+            "stylist": {
+                "id": 1,
+                "name": "Alejandra"
+            },
+            "appointments": [
+                {
+                    "id": 1,
+                    "stylist": {
+                        "id": 1,
+                        "name": "Alejandra"
+                    },
+                    "client": {
+                        "id": 1,
+                        "name": "Yazmin Gómez",
+                        "phone": "8135120721"
+                    },
+                    "startTime": "13:00:00",
+                    "endTime": "14:00:00",
+                    "duration": 60,
+                    "title": "Tinte Completo"
+                },
+                {
+                    "id": 2,
+                    "stylist": {
+                        "id": 1,
+                        "name": "Alejandra"
+                    },
+                    "client": {
+                        "id": 2,
+                        "name": "Araceli Cerda",
+                        "phone": "8135120721"
+                    },
+                    "startTime": "17:00:00",
+                    "endTime": "19:00:00",
+                    "duration": 120,
+                    "title": "Extensiones"
+                }
+            ]
+        },
+        {
+            "stylist": {
+                "id": 2,
+                "name": "Nayeli"
+            },
+            "appointments": [
+                {
+                    "id": 3,
+                    "stylist": {
+                        "id": 2,
+                        "name": "Nayeli"
+                    },
+                    "client": {
+                        "id": 4,
+                        "name": "Barbara Mendoza",
+                        "phone": "8135120721"
+                    },
+                    "startTime": "11:00:00",
+                    "endTime": "12:00:00",
+                    "duration": 60,
+                    "title": "Tinte Completo"
+                },
+                {
+                    "id": 4,
+                    "stylist": {
+                        "id": 2,
+                        "name": "Nayeli"
+                    },
+                    "client": {
+                        "id": 3,
+                        "name": "Bianca Mendoza",
+                        "phone": "8135120721"
+                    },
+                    "startTime": "14:00:00",
+                    "endTime": "16:00:00",
+                    "duration": 120,
+                    "title": "Extensiones"
+                }
+            ]
+        }
+    ]
+}

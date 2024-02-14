@@ -33,7 +33,7 @@ export const ClientsTable = () => {
                                     <TableCell>{client.id}</TableCell>
                                     <TableCell>{client.name}</TableCell>
                                     <TableCell>{client.email}</TableCell>
-                                    <TableCell>{client.profile?.phone ?? 'No disponible'}</TableCell>
+                                    <TableCell>{client.phone ?? 'No disponible'}</TableCell>
                                     <TableCell>{new Date(client.created_at).toLocaleString()}</TableCell>
                                     <TableCell>
                                         <NavLink

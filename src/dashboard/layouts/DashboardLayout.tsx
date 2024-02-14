@@ -80,7 +80,8 @@ export const DashboardLayout = ({
                 title: "Agenda",
                 label: "9",
                 icon: CalendarDays,
-                variant: "ghost",
+                variant: location.pathname.startsWith('/schedule') ? 'default' : 'ghost',
+                uri: 'schedule'
               },
               {
                 title: "Clientes",
@@ -125,18 +126,20 @@ export const DashboardLayout = ({
                 title: "Productos",
                 label: "",
                 icon: ShoppingCart,
-                variant: "ghost",
+                variant: location.pathname.startsWith('/products') ? 'default' : 'ghost',
+                uri: 'products'
+              },
+              {
+                title: "Services",
+                label: "",
+                icon: BadgePercent,
+                variant: location.pathname.startsWith('/services') ? 'default' : 'ghost',
+                uri: 'services'
               },
               {
                 title: "Inventario",
                 label: "128",
                 icon: Boxes,
-                variant: "ghost",
-              },
-              {
-                title: "Promociones",
-                label: "",
-                icon: BadgePercent,
                 variant: "ghost",
               },
               {

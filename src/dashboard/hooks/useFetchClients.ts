@@ -4,6 +4,7 @@ import { getClients } from "../helpers/getClients";
 interface Client {
   id: number;
   name: string;
+  phone: string;
   email: string;
   email_verified_at: null;
   verification_token: null;
@@ -28,7 +29,7 @@ export interface Profile {
   state: string;
   postal_code: string;
   country: string;
-  phone: string;
+  
   date_of_birth: string;
   date_of_first_visit: string;
   client_id: number;

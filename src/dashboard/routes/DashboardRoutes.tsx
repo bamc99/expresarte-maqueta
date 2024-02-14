@@ -9,6 +9,9 @@ import { UserRoutes } from './UserRoutes';
 import { ClientsPage } from '../pages/clients/ClientsPage';
 import { NewClientPage } from '../pages/clients/NewClientPage';
 import { ClientRoutes } from './ClientRoutes';
+import { SchedulePage } from '../pages/schedule/SchedulePage';
+import { ProductsPage } from '../pages/products/ProductsPage';
+import { ServicesPage } from '../pages/services/ServicesPage';
 
 export const DashboardRoutes = () => {
 
@@ -45,11 +48,20 @@ export const DashboardRoutes = () => {
         <Routes>
           <Route path="/*" element={<Navigate to="/home" replace />} />
           <Route path="home" element={<HomePage />} />
+          
+          <Route path="schedule" element={<SchedulePage />} />
+
+          <Route path="products" element={<ProductsPage />} />
+
+          <Route path="services" element={<ServicesPage />} />
+
           <Route path="users" element={<UsersPage />} />
           <Route path="users/new" element={<NewUserPage />} />
           <Route path="users/edit/*" element={<UserRoutes />} />
+
           <Route path="branches" element={<BranchesPage />} />
           <Route path="branches/new" element={<NewBranchPage />} />
+
           <Route path="clients" element={<ClientsPage />} />
           <Route path="clients/new" element={<NewClientPage />} />
           <Route path="clients/edit/*" element={<ClientRoutes />} />
